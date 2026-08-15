@@ -8,7 +8,7 @@ output "cloudwatch_composite_alarms_actions_enabled" {
 }
 output "cloudwatch_composite_alarms_actions_suppressor" {
   description = "Map of actions_suppressor values across all cloudwatch_composite_alarms, keyed the same as var.cloudwatch_composite_alarms"
-  value       = { for k, v in aws_cloudwatch_composite_alarm.cloudwatch_composite_alarms : k => v.actions_suppressor if v.actions_suppressor != null && length(v.actions_suppressor) > 0 }
+  value       = { for k, v in aws_cloudwatch_composite_alarm.cloudwatch_composite_alarms : k => one(v.actions_suppressor) if v.actions_suppressor != null && length(v.actions_suppressor) > 0 }
 }
 output "cloudwatch_composite_alarms_alarm_actions" {
   description = "Map of alarm_actions values across all cloudwatch_composite_alarms, keyed the same as var.cloudwatch_composite_alarms"
